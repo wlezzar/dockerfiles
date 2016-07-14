@@ -1,7 +1,6 @@
 FROM wlezzar/confluent:2.0.1
 
-ENV KAFKA_CONF_broker_id=0 \
-    KAFKA_CONF_listeners=PLAINTEXT://:9092 \
+ENV KAFKA_CONF_listeners=PLAINTEXT://:9092 \
     KAFKA_CONF_num_network_threads=3 \
     KAFKA_CONF_num_io_threads=8 \
     KAFKA_CONF_socket_send_buffer_bytes=102400 \

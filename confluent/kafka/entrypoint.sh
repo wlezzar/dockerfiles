@@ -7,8 +7,6 @@ CONFIG_FILE=/server.properties
 dockerize -template /server.properties.tmpl | grep -ve "^\s*$" | awk '{$1=$1};1' > $CONFIG_FILE
 
 if [ "$#" -eq 0 ]; then
-	# generate a broker id if it does not exist
-	: ${KAFKA_CONF_broker_id:=$RANDOM}
 	# wait for zookeeper
 	ZOOKEEPER_URL=$(echo "$KAFKA_CONF_zookeeper_connect" | cut -d"," -f1 | cut -d"/" -f1)
 	WAIT_FOR_TCP="$ZOOKEEPER_URL,$WAIT_FOR_TCP"
