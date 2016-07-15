@@ -9,6 +9,7 @@ fi
 TAG=$1
 
 docker build -t wlezzar/zookeeper:$TAG zookeeper
+docker build -t wlezzar/zookeeper-exhibitor:$TAG zookeeper-exhibitor
 docker build -t wlezzar/kafka:$TAG kafka
 docker build -t wlezzar/schema-registry:$TAG schema-registry
 docker build -t wlezzar/kafka-rest:$TAG kafka-rest
