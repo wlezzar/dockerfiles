@@ -1,4 +1,4 @@
-FROM wlezzar/confluent:2.0.1
+FROM wlezzar/confluent:3.0.0
 
 ENV SR_CONF_port=8081 \
     SR_CONF_kafkastore_connection_url=localhost:2181 \

@@ -1,4 +1,4 @@
-FROM wlezzar/confluent:2.0.1
+FROM wlezzar/confluent:3.0.0
 
 ENV KAFKA_CONF_listeners=PLAINTEXT://:9092 \
     KAFKA_CONF_num_network_threads=3 \

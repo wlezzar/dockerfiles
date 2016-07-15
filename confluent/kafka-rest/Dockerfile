@@ -1,4 +1,4 @@
-FROM wlezzar/confluent:2.0.1
+FROM wlezzar/confluent:3.0.0
 
 ENV KAFKA_REST_CONF_id=kafka-rest-test-server \
     KAFKA_REST_CONF_schema_registry_url=http://localhost:8081 \
