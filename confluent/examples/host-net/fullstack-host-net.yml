@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  zookeeper:
+    image: wlezzar/zookeeper:confluent-2.0.1
+    network_mode: host
+  kafka:
+    image: wlezzar/kafka:confluent-2.0.1
+    depends_on:
+      - zookeeper
+    network_mode: host
+  schema-registry:
+    image: wlezzar/schema-registry:confluent-2.0.1
+    depends_on:
+      - zookeeper
+      - kafka
+    environment:
+      WAIT_FOR_TCP: "localhost:9092"
+    network_mode: host
+  kafka-rest:
+    image: wlezzar/kafka-rest:confluent-2.0.1
+    depends_on:
+      - zookeeper
+      - kafka
+      - schema-registry
+    network_mode: host
+    environment:
+      WAIT_FOR_TCP: "localhost:9092,localhost:8081"
