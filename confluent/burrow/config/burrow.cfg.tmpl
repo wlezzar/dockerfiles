@@ -1,0 +1,41 @@
+[general]
+logdir=/tmp
+logconfig=/burrow/config/logging.cfg
+pidfile=burrow.pid
+client-id={{ .Env.BURROW_CLIENT_ID }}
+group-blacklist=^(console-consumer-|python-kafka-consumer-).*$
+#group-whitelist=^(my-important-consumer).*$
+
+[zookeeper]
+{{ with split .Env.BURROW_ZOOKEEPER_HOSTS "," }}
+    {{ range $zookeeper := . }}
+hostname={{ $zookeeper }}        
+    {{ end }}
+{{ end }}
+timeout=6
+lock-path=/burrow/notifier
+
+[kafka "{{ .Env.BURROW_KAFKA_CLUSTER_NAME }}"]
+{{ with split .Env.BURROW_KAFKA_HOSTS "," }}
+    {{ range $kafka := . }}
+broker={{ $kafka }}        
+    {{ end }}
+{{ end }}
+{{ with split .Env.BURROW_ZOOKEEPER_HOSTS "," }}
+    {{ range $zookeeper := . }}
+zookeeper={{ $zookeeper }}        
+    {{ end }}
+{{ end }}
+zookeeper-path={{ .Env.BURROW_KAFKA_ZOOKEEPER_PATH }}
+offsets-topic=__consumer_offsets
+
+[tickers]
+broker-offsets={{ .Env.BURROW_BROKER_OFFSETS }}
+
+[lagcheck]
+intervals={{ .Env.BURROW_LAGCHECK_INTERVAL }}
+expire-group=604800
+
+[httpserver]
+server=on
+port=8000
