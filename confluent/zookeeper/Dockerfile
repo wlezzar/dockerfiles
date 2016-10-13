@@ -1,4 +1,4 @@
-FROM wlezzar/confluent:3.0.0
+FROM wlezzar/confluent:3.0.1
 
 ENV ZOOKEEPER_CONF_dataDir=/data/zookeeper-data \
     ZOOKEEPER_CONF_clientPort=2181 \

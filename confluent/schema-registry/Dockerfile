@@ -1,6 +1,6 @@
-FROM wlezzar/confluent:3.0.0
+FROM wlezzar/confluent:3.0.1
 
-ENV SR_CONF_port=8081 \
+ENV SR_CONF_listeners=http://0.0.0.0:8081 \
     SR_CONF_kafkastore_connection_url=localhost:2181 \
     SR_CONF_kafkastore_topic=_schemas \
     SR_CONF_debug=false

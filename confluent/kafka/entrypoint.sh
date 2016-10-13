@@ -3,10 +3,12 @@ set -e
 
 CONFIG_FILE=/server.properties
 
-if [[ -z "$KAFKA_CONF_advertised_host_name" && -n "$ADVERTISE_INTERFACE" ]]; then
+if [[ -z "$KAFKA_CONF_advertised_listeners" && -n "$ADVERTISE_INTERFACE" ]]; then
 	ip -o -4 addr list $ADVERTISE_INTERFACE || exit 1
-	export KAFKA_CONF_advertised_host_name=$(ip -o -4 addr list $ADVERTISE_INTERFACE | awk '{print $4}' | cut -d/ -f1)
-	echo "KAFKA_CONF_advertised_host_name set to : $KAFKA_CONF_advertised_host_name"
+	ADVERTISED_IP=$(ip -o -4 addr list $ADVERTISE_INTERFACE | awk '{print $4}' | cut -d/ -f1)
+	ADVERTISED_PORT=${ADVERTISE_PORT:-9092}
+	export KAFKA_CONF_advertised_listeners="PLAINTEXT://${ADVERTISED_IP}:${ADVERTISED_PORT}"
+	echo "KAFKA_CONF_advertised_listeners set to : $KAFKA_CONF_advertised_listeners"
 fi
 
 # create kafka configuration file

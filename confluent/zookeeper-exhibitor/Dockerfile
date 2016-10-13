@@ -1,4 +1,4 @@
-FROM wlezzar/zookeeper:confluent-3.0.0
+FROM wlezzar/zookeeper:confluent-3.0.1
 
 # Install supervisor
 RUN apt-get update \

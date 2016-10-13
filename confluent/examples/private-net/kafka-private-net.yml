@@ -2,11 +2,11 @@ version: "2"
 
 services:
   zookeeper:
-    image: wlezzar/zookeeper-exhibitor:confluent-3.0.0
+    image: wlezzar/zookeeper-exhibitor:confluent-3.0.1
     ports:
       - "8080:8080"
   kafka:
-    image: wlezzar/kafka:confluent-3.0.0
+    image: wlezzar/kafka:confluent-3.0.1
     depends_on:
       - zookeeper
     environment:

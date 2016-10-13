@@ -11,7 +11,7 @@ if [[ -z "$TAG" ]]; then
 fi
 
 BURROW_BIN_NAME='burrow'
-docker run -it --rm -e BURROW_BIN_NAME="${BURROW_BIN_NAME}" -v $THIS_DIR:/host -w /host golang ./package_burrow.sh
+docker run -it --rm -e BURROW_BIN_NAME="${BURROW_BIN_NAME}" -v $THIS_DIR:/host -w /host golang ./package-burrow.sh
 
 docker build -t wlezzar/burrow:$TAG .
 # rm -rf $REPO_NAME

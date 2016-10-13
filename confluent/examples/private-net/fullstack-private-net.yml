@@ -2,18 +2,18 @@ version: "2"
 
 services:
   zookeeper:
-    image: wlezzar/zookeeper-exhibitor:confluent-2.0.1
+    image: wlezzar/zookeeper-exhibitor:confluent-3.0.1
     ports:
       - "8080:8080"
   kafka:
-    image: wlezzar/kafka:confluent-2.0.1
+    image: wlezzar/kafka:confluent-3.0.1
     depends_on:
       - zookeeper
     environment:
       KAFKA_CONF_zookeeper_connect: "zookeeper:2181"
       ADVERTISE_INTERFACE: "eth0"
   schema-registry:
-    image: wlezzar/schema-registry:confluent-2.0.1
+    image: wlezzar/schema-registry:confluent-3.0.1
     depends_on:
       - zookeeper
       - kafka
@@ -21,7 +21,7 @@ services:
       SR_CONF_kafkastore_connection_url: "zookeeper:2181"
       WAIT_FOR_TCP: "kafka:9092"
   kafka-rest:
-    image: wlezzar/kafka-rest:confluent-2.0.1
+    image: wlezzar/kafka-rest:confluent-3.0.1
     depends_on:
       - zookeeper
       - kafka
