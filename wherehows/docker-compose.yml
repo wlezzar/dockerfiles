@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+    database:
+        image: wlezzar/wherehows-database:master
+        environment: 
+            MYSQL_ROOT_PASSWORD: password
+    front:
+        image: wlezzar/wherehows-front:master
+        environment:
+            WHZ_FRONT_database__opensource__url: jdbc:mysql://database/wherehows?charset=utf8&zeroDateTimeBehavior=convertToNull
+            WHZ_FRONT_backend__service__url: http://backend:9000
+        ports:
+            - "9000:9000"
+    backend:
+        image: wlezzar/wherehows-backend:master
+        environment: 
+            WHZ_BACK_db__wherehows__url: jdbc:mysql://database/wherehows?charset=utf8&zeroDateTimeBehavior=convertToNull
+            WHZ_BACK_db__wherehows__host: database
+            WAIT_FOR_TCP: database:3306
+        ports:
+            - "9001:9000"

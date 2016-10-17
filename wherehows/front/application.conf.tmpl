@@ -1,0 +1,9 @@
+{{ $config_pattern := "WHZ_FRONT_" }}
+
+{{ range $key, $value := .Env }}
+  {{ if hasPrefix $key $config_pattern }}
+    {{ with replace $key $config_pattern "" 1 }}
+      {{ replace . "__" "." -1 }}="{{ $value }}"
+    {{ end }}
+  {{ end }}
+{{ end }}
