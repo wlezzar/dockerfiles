@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+    namenode:
+        image: wlezzar/hdfs-namenode:2.7
+        ports:
+            - "50070:50070" 
+        env_file: hadoop.env
+    datanode:
+        image: wlezzar/hdfs-datanode:2.7
+        depends_on:
+            - namenode
+        env_file: hadoop.env
+    hive-server:
+        image: wlezzar/hive:2.1
+        depends_on:
+            - metastore-db
+        environment:
+            WAIT_FOR_TCP: metastore-db:5432
+        env_file: hadoop.env
+        ports: 
+            - "10000:10000"
+    hive-metastore:
+        image: wlezzar/hive:2.1
+        depends_on:
+            - metastore-db
+        environment:
+            WAIT_FOR_TCP: metastore-db:5432
+        env_file: hadoop.env
+        command: hive --service metastore
+    metastore-db:
+        image: wlezzar/hive-metastore-db:2.1
