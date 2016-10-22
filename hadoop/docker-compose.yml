@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+    namenode:
+        image: wlezzar/hdfs-namenode:2.7
+        ports:
+            - "50070:50070" 
+        env_file: hadoop.env
+    datanode:
+        image: wlezzar/hdfs-datanode:2.7
+        env_file: hadoop.env

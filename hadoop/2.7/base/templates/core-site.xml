@@ -1,0 +1,13 @@
+{{ $config_pattern := "CORE_SITE_" }}
+<configuration>
+{{ range $key, $value := .Env }}
+  {{ if hasPrefix $key $config_pattern }}
+    {{ with replace $key $config_pattern "" 1 }}
+    <property>
+      <name>{{ replace (replace . "__" "." -1) "_" "-" -1 }}</name>
+      <value>{{ $value }}</value>
+    </property>
+    {{ end }}
+  {{ end }}
+{{ end }}
+</configuration>
