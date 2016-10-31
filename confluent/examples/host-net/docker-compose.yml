@@ -2,12 +2,16 @@ version: "2"
 
 services:
   zookeeper:
-    image: wlezzar/zookeeper:confluent-3.0.1
+    image: wlezzar/zookeeper-exhibitor:confluent-3.0.1
+    ports:
+      - "8080:8080"
     network_mode: host
   kafka:
     image: wlezzar/kafka:confluent-3.0.1
     depends_on:
       - zookeeper
+    environment:
+      JMX_PORT: "9999"
     network_mode: host
   schema-registry:
     image: wlezzar/schema-registry:confluent-3.0.1
