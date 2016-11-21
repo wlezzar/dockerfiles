@@ -21,6 +21,7 @@ ENV BURROW_CLIENT_ID="burrow-lagchecker" \
     BURROW_KAFKA_HOSTS="localhost:9092" \
     BURROW_KAFKA_ZOOKEEPER_PATH="/" \
     BURROW_BROKER_OFFSETS="60" \
-    BURROW_LAGCHECK_INTERVAL="10"
+    BURROW_LAGCHECK_INTERVAL="10" \
+    BURROW_GROUP_BLACKLIST='^(console-consumer-|python-kafka-consumer-).*$'
 
 ENTRYPOINT ["/entrypoint.sh"]

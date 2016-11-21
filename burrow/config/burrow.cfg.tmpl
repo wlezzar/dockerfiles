@@ -3,7 +3,7 @@ logdir=/tmp
 logconfig=/burrow/config/logging.cfg
 pidfile=burrow.pid
 client-id={{ .Env.BURROW_CLIENT_ID }}
-group-blacklist=^(console-consumer-|python-kafka-consumer-).*$
+group-blacklist={{ .Env.BURROW_GROUP_BLACKLIST }}
 #group-whitelist=^(my-important-consumer).*$
 
 [zookeeper]
