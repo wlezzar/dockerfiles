@@ -308,7 +308,7 @@
      <object class="java.util.Collections" method="unmodifiableList">
       <object class="java.util.ArrayList">
        <void method="add">
-        <string>monetdb-jdbc-2.9-java6.jar</string>
+        <string>/opt/sqlworkbench/drivers/monetdb.jar</string>
        </void>
       </object>
      </object>

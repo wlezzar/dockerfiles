@@ -22,7 +22,8 @@ RUN wget -O /tmp/Workbench-Build.zip http://www.sql-workbench.net/Workbench-Buil
 RUN mkdir $SQL_WORKBENCH_HOME/drivers && \
     wget -O $SQL_WORKBENCH_HOME/drivers/postgresql.jar https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar && \
     wget -O $SQL_WORKBENCH_HOME/drivers/mysql.jar http://central.maven.org/maven2/mysql/mysql-connector-java/6.0.5/mysql-connector-java-6.0.5.jar && \
-    wget -O $SQL_WORKBENCH_HOME/drivers/redshift.jar https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC42-1.1.17.1017.jar 
+    wget -O $SQL_WORKBENCH_HOME/drivers/redshift.jar https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC42-1.1.17.1017.jar && \
+    wget -O $SQL_WORKBENCH_HOME/drivers/monetdb.jar http://dev.monetdb.org/downloads/Java/Jun2016-SP2/monetdb-jdbc-2.23.jar 
 
 COPY entrypoint.sh WbDrivers.xml / 
 
