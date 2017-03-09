@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+
+  jmxtrans:
+    image: wlezzar/jmxtrans:263
+    volumes:
+      - ./basic.json:/basic.json
+    environment:
+      JMX_PORT: 9999
+      FILENAME: /basic.json
+
