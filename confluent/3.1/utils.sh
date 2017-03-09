@@ -1,5 +1,5 @@
 # create a topic
-docker run --net host -it --rm wlezzar/confluent:3.0.1 kafka-topics --create --topic test_topic --partitions 10 --zookeeper localhost:2181 --replication-factor 1
+docker run --net host -it --rm wlezzar/confluent:3.1.1 kafka-topics --create --topic test_topic --partitions 10 --zookeeper zookeeper:2181 --replication-factor 3
 
 # create a schema for a topic
 curl -X POST -i -H "Content-Type: application/vnd.schemaregistry.v1+json" --data '{"schema": "{\"type\": \"string\"}"}' http://localhost:8081/subjects/test_topic-value/versions

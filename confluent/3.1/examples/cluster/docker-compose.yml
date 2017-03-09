@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  zookeeper01:
+    image: wlezzar/zookeeper:confluent-3.1.1
+    env_file: zookeeper.env
+    environment:
+      ZOOKEEPER_myid: 1
+  zookeeper02:
+    image: wlezzar/zookeeper:confluent-3.1.1
+    env_file: zookeeper.env
+    environment:
+      ZOOKEEPER_myid: 2
+  zookeeper03:
+    image: wlezzar/zookeeper:confluent-3.1.1
+    env_file: zookeeper.env
+    environment:
+      ZOOKEEPER_myid: 3
+  kafka:
+    image: wlezzar/kafka:confluent-3.1.1
+    depends_on:
+      - zookeeper01
+      - zookeeper02
+      - zookeeper03
+    environment:
+      JMX_PORT: "9999"
+      KAFKA_CONF_auto_create_topics_enable: "false"
+      KAFKA_CONF_zookeeper_connect: zookeeper01:2181,zookeeper02:2181,zookeeper03:2181

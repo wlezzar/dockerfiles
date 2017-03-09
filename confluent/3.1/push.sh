@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-TAG=3.0.1
+TAG=3.1.1
 
 docker push wlezzar/confluent:$TAG
 docker push wlezzar/zookeeper:confluent-$TAG

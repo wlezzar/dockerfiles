@@ -11,6 +11,11 @@ if [[ -z "$KAFKA_CONF_advertised_listeners" && -n "$ADVERTISE_INTERFACE" ]]; the
 	echo "KAFKA_CONF_advertised_listeners set to : $KAFKA_CONF_advertised_listeners"
 fi
 
+# Broker id may be an expression
+if [[ -n "$KAFKA_broker_id_expr" ]]; then
+  eval "export KAFKA_CONF_broker_id=$KAFKA_broker_id_expr"
+fi
+
 # create kafka configuration file
 dockerize -template /server.properties.tmpl | grep -ve "^\s*$" | awk '{$1=$1};1' > $CONFIG_FILE
 
