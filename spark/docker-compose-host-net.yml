@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+    
+    spark-master:
+        image: wlezzar/spark:2.1.0-hadoop-2.7
+        network_mode: host
+        environment: 
+            JMX_PORT: "9999"
+        command: spark-class org.apache.spark.deploy.master.Master -h localhost
+    
+    spark-worker:
+        image: wlezzar/spark:2.1.0-hadoop-2.7
+        network_mode: host
+        command: spark-class org.apache.spark.deploy.worker.Worker spark://localhost:7077
+        depends_on: 
+            - spark-master

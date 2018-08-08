@@ -1,0 +1,27 @@
+version: "2"
+
+networks: 
+    spark-net:
+
+services:
+    
+    spark-master:
+        image: wlezzar/spark:2.1.0-hadoop-2.7
+        networks: ["spark-net"]
+        environment: 
+            JMX_PORT: "9999"
+        command: spark-class org.apache.spark.deploy.master.Master -h spark-master
+    
+    spark-worker:
+        image: wlezzar/spark:2.1.0-hadoop-2.7
+        networks: ["spark-net"]
+        command: spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+        depends_on: 
+            - spark-master
+            
+    spark-ui-proxy:
+        image: elsonrodriguez/spark-ui-proxy:1.0
+        networks: ["spark-net"]
+        ports: 
+            - "8080:80"
+        command: spark-master:8080
