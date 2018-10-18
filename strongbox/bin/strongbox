@@ -1,0 +1,6 @@
+#!/bin/bash
+
+STRONGBOX_VERSION=${STRONGBOX_VERSION:-"latest"}
+DOCKER_RUN_ME="docker container run --user=$(id -u):$(id -g) -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v $HOME:$HOME -v $(pwd):/host/$(pwd) -w /host/$(pwd)"
+
+exec ${DOCKER_RUN_ME} wlezzar/strongbox:${STRONGBOX_VERSION} $@
