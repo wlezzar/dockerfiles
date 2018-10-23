@@ -1,0 +1,12 @@
+#!/bin/bash
+
+AWS_VERSION=${AWS_VERSION:-"latest"}
+DOCKER_RUN_ME="docker container run --user=$(id -u):$(id -g) -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v $HOME:$HOME -v $(pwd):/host/$(pwd) -w /host/$(pwd)"
+
+if [[ -n "${AWS_SECRET_ACCESS_KEY}" ]]; then
+    DOCKER_RUN_ME="${DOCKER_RUN_ME} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}"
+    DOCKER_RUN_ME="${DOCKER_RUN_ME} -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+    DOCKER_RUN_ME="${DOCKER_RUN_ME} -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}"
+fi
+
+exec ${DOCKER_RUN_ME} --net host --rm -it wlezzar/aws:${AWS_VERSION} $@
